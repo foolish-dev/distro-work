@@ -148,7 +148,7 @@ wallpapers/                    23 curated Tokyo Night wallpapers (4K)
 assets/                        README SVG images (header, dividers, palette, architecture)
 etc/
   sddm.conf.d/niri.conf       SDDM display manager config (deployed to /etc)
-  sddm-themes/                 custom astronaut theme configs (tokyo-night, cyberpunk)
+  sddm-themes/                 custom Tokyo Night astronaut variants (tokyo-night, cyberpunk)
 bootstrap.sh                   one-liner installer (curl | bash)
 install.sh                     Arch + BlackArch + Chaotic AUR package bootstrap
 deploy.sh                      symlink deployer with auto-backup
@@ -353,7 +353,7 @@ Tokyo Night is the static fallback before the first `wal` run.
 
 ## SDDM Themes
 
-Five SDDM themes are installed, with two custom Tokyo Night configs for the [astronaut](https://github.com/Keyitdev/sddm-astronaut-theme) theme (Qt6):
+The default is [noctalia](https://github.com/noctalia-dev/noctalia-shell)'s SDDM theme, which auto-syncs the lock screen to the desktop wallpaper via a path-watch unit. Several alternates are installed, including two custom Tokyo Night configs for the [astronaut](https://github.com/Keyitdev/sddm-astronaut-theme) theme (Qt6):
 
 | Theme | Style |
 |---|---|

@@ -197,11 +197,15 @@ if [[ "${DOTFILES_SKIP_SDDM_SYNC:-0}" == "1" ]]; then
   info "Skipping SDDM noctalia background-sync (DOTFILES_SKIP_SDDM_SYNC=1)"
 elif [[ -f "$DOTFILES/etc/systemd/system/sddm-noctalia-sync.path" ]]; then
   info "Deploying SDDM noctalia background-sync units ..."
-  sudo cp "$DOTFILES/etc/systemd/system/sddm-noctalia-sync.path" \
-    /etc/systemd/system/sddm-noctalia-sync.path
-  sudo cp "$DOTFILES/etc/systemd/system/sddm-noctalia-sync.service" \
-    /etc/systemd/system/sddm-noctalia-sync.service
-  ok "  Copied sddm-noctalia-sync.{path,service}"
+  # Units watch ~/.cache/noctalia/... for the deploying user; the tracked
+  # copies use __USER_HOME__ as a placeholder so the repo stays user-neutral.
+  sudo sed "s|__USER_HOME__|$HOME|g" \
+    "$DOTFILES/etc/systemd/system/sddm-noctalia-sync.path" \
+    | sudo tee /etc/systemd/system/sddm-noctalia-sync.path >/dev/null
+  sudo sed "s|__USER_HOME__|$HOME|g" \
+    "$DOTFILES/etc/systemd/system/sddm-noctalia-sync.service" \
+    | sudo tee /etc/systemd/system/sddm-noctalia-sync.service >/dev/null
+  ok "  Installed sddm-noctalia-sync.{path,service} (HOME=$HOME)"
   sudo systemctl daemon-reload 2>/dev/null || true
   if [[ -d /usr/share/sddm/themes/noctalia ]]; then
     sudo systemctl enable --now sddm-noctalia-sync.path 2>/dev/null ||
@@ -274,7 +278,7 @@ info "  Prompt:  ~/.config/starship.toml"
 info "  Scripts: ~/.local/bin/ (${script_count} scripts)"
 info "  Apps:    ~/.local/share/applications/ (${desktop_count} desktop entries)"
 info "  Walls:   ~/Pictures/Wallpapers/ (${wallpaper_count} wallpapers)"
-info "  SDDM:    /etc/sddm.conf.d/niri.conf + astronaut cyberpunk theme"
+info "  SDDM:    /etc/sddm.conf.d/niri.conf (theme: noctalia, with shell-wallpaper sync)"
 info ""
 if [[ -d "$BACKUP_DIR" ]]; then
   info "  Backups: $BACKUP_DIR"

@@ -26,9 +26,9 @@ you care about.
 - Symlinks configs into `~/.config/`, shell config into `~/.zshrc`,
   scripts into `~/.local/bin/`
 - Copies system-wide SDDM config into `/etc/sddm.conf.d/` (requires sudo)
-- With `DEPLOY_LOADER=1`, copies `systemd-boot` loader entries into
-  `/boot/loader/` — the tracked entries reference a specific PARTUUID + kernel
-  cmdline. Applying those on a different install leaves the box unbootable.
+- Installs the SDDM noctalia background-sync `.path` + `.service` units into
+  `/etc/systemd/system/` and enables the path watcher (requires sudo).
+  Skip with `DOTFILES_SKIP_SDDM_SYNC=1`.
 
 ## Reporting a vulnerability
 

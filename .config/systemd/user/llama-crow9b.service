@@ -5,10 +5,10 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-Environment=LD_LIBRARY_PATH=/home/fool/.local/llama.cpp
-ExecStart=/home/fool/.local/llama.cpp/llama-server \
-  --model /home/fool/.local/share/llama-models/crow-9b-heretic.Q8_0.gguf \
-  --mmproj /home/fool/.local/share/llama-models/crow-9b-heretic.mmproj-Q8_0.gguf \
+Environment=LD_LIBRARY_PATH=%h/.local/llama.cpp
+ExecStart=%h/.local/llama.cpp/llama-server \
+  --model %h/.local/share/llama-models/crow-9b-heretic.Q8_0.gguf \
+  --mmproj %h/.local/share/llama-models/crow-9b-heretic.mmproj-Q8_0.gguf \
   --host 127.0.0.1 --port 18081 \
   --ctx-size 32768 \
   --n-gpu-layers 99 \

@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "name": "Open Code — ROG Zephyrus G14 Optimized",
+  "name": "Open Code",
   "systemPrompt": "You are Open Code, an AI coding assistant integrated into a powerful developer environment. You have access to the following capabilities and tools:",
 
   "tools": {
