@@ -144,20 +144,60 @@
 
   // ── MCP Server Configuration ─────────────────────────────────
   // Servers referenced by agents below. Defining them here makes
-  // `context7` / `hexstrike-ai` resolvable as tool names.
+  // each MCP resolvable as a tool name in agent `tools` blocks.
+  // Mirrored from ~/.config/crush/crush.json.
   "mcp": {
     "context7": {
       "type": "remote",
       // /sse was retired -- current endpoint is streamable HTTP at /mcp.
-      // Add CONTEXT7_API_KEY to headers (via {env:CONTEXT7_API_KEY}) for
-      // higher rate limits; anonymous access still works.
-      "url": "https://mcp.context7.com/mcp"
+      // Auth header gives higher rate limits; anonymous access also works.
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "Authorization": "Bearer {env:CONTEXT7_API_KEY}"
+      }
+    },
+    "filesystem": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-filesystem", "/home/fool"]
+    },
+    "github": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
+      "environment": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    "fetch": {
+      "type": "local",
+      "command": ["npx", "-y", "@tokenizin/mcp-npx-fetch"]
     },
     "hexstrike-ai": {
       "type": "local",
-      "command": ["hexstrike-mcp"],
+      "command": [
+        "/home/fool/tools/hexstrike-ai/hexstrike-env/bin/python",
+        "/home/fool/tools/hexstrike-ai/hexstrike_mcp.py",
+        "--server",
+        "http://localhost:8888"
+      ],
       "enabled": true,
-      "timeout": 30000
+      // crush used 300s; opencode timeout is in ms.
+      "timeout": 300000
+    },
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "-y", "@playwright/mcp@latest"]
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "memory": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-memory"]
+    },
+    "git": {
+      "type": "local",
+      "command": ["/home/fool/.local/bin/mcp-server-git"]
     },
     // From heimdall_opencode — demo MCP, runs via `opencode x`.
     "weather": {
