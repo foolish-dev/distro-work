@@ -194,6 +194,8 @@ deploy.sh                      symlink deployer with auto-backup
 | `Super+Shift+P` | Power off monitors |
 | `Super+Shift+E` | Quit niri |
 | `Super+Shift+C` | Reload niri config |
+| `Super+Shift+/` | Show hotkey overlay (all keybinds) |
+| `Super+O` | Toggle on-screen keyboard (wvkbd, tablet mode) |
 | `Super+Ctrl+M` | msfconsole |
 | `Super+Ctrl+W` | Wireshark |
 | `Super+Ctrl+B` | Burp Suite |
