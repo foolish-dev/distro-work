@@ -123,7 +123,7 @@ First `nvim` launch auto-installs all plugins and LSP servers.
   fuzzel/fuzzel.ini            app launcher
   starship.toml                prompt
   opencode/opencode.json       AI agent config (LM Studio provider, HexStrike MCP)
-  wal/templates/               pywal templates (kitty, noctalia)
+  wal/templates/               pywal templates (kitty, noctalia, tmux)
   neofetch/                    system fetch display (fallback for fastfetch)
   systemd/user/                cliphist, awww, hexstrike-server, llama-crow9b services + fwupd-check service/timer
 .zshrc                         shell -- 80+ aliases, BlackArch tool shortcuts, pywal init
@@ -350,6 +350,7 @@ The `wallpaper` script:
 2. Sets the wallpaper via `awww img` with a grow transition
 3. Live-reloads kitty colors
 4. Copies the generated `colors-noctalia.json` into noctalia's config
+5. Reloads tmux colors in every running server (iterates `/tmp/tmux-$UID/*` sockets)
 
 Tokyo Night is the static fallback before the first `wal` run.
 
