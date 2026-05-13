@@ -407,7 +407,7 @@ Sourced from [tokyo-night/wallpapers](https://github.com/tokyo-night/wallpapers)
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/launcher.svg"/>
     <source media="(prefers-color-scheme: light)" srcset="assets/launcher-light.svg"/>
-    <img src="assets/launcher.svg" alt="Noctalia launcher section header — 147 pinned apps across 21 categories" width="900"/>
+    <img src="assets/launcher.svg" alt="Noctalia launcher section header — 157 pinned apps across 21 categories" width="900"/>
   </picture>
 </p>
 
@@ -417,7 +417,7 @@ The Noctalia dock and app launcher are pre-configured with pinned security tools
 
 **Dock** (bottom bar): Kitty, Firefox, Thunar, LM Studio, Wireshark, Burp Suite, Metasploit, Nmap, Iaito, Autopsy, btop
 
-**Launcher** (147 pinned apps across 21 categories, ordered by workflow):
+**Launcher** (157 pinned apps across 21 categories, ordered by workflow):
 
 | Group | Apps |
 |---|---|
@@ -451,7 +451,7 @@ The Noctalia dock and app launcher are pre-configured with pinned security tools
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/blackarch.svg"/>
     <source media="(prefers-color-scheme: light)" srcset="assets/blackarch-light.svg"/>
-    <img src="assets/blackarch.svg" alt="BlackArch section header — 300+ offensive security tools across 21 categories" width="900"/>
+    <img src="assets/blackarch.svg" alt="BlackArch section header — 300+ offensive security tools across 19 categories" width="900"/>
   </picture>
 </p>
 
