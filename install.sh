@@ -384,7 +384,6 @@ PKG_BLACKARCH=(
   # ── Exploitation frameworks ────────────────────────────────────────────
   blackarch-exploitation
   exploitdb
-  searchsploit
   routersploit
   netexec
   evil-winrm
@@ -443,14 +442,12 @@ PKG_BLACKARCH=(
 
   # ── Privilege escalation / post-exploitation ───────────────────────────
   linpeas
-  winpeas
   pspy
   linenum
   linux-exploit-suggester
   mimikatz
   bloodhound
   sharphound
-  rubeus
   chisel
   ligolo-ng
   pwncat
@@ -490,7 +487,6 @@ PKG_BLACKARCH=(
   blackarch-networking
   mitmproxy
   ettercap
-  arpspoof
   tcpreplay
   hping
   ncrack
@@ -505,8 +501,7 @@ PKG_BLACKARCH=(
   blackarch-social
   social-engineer-toolkit
   gophish
-  king-phisher
-  evilginx2
+  evilginx
 
   # ── Crypto ─────────────────────────────────────────────────────────────
   blackarch-crypto
@@ -526,7 +521,6 @@ PKG_BLACKARCH=(
 
   # ── Fuzzing ────────────────────────────────────────────────────────────
   blackarch-fuzzer
-  afl
   afl++
   boofuzz
   radamsa
@@ -553,7 +547,7 @@ PKG_BLACKARCH=(
   fuzzdb
   payloadsallthethings
   webshells
-  cyberchef
+  cyberchef-electron
 )
 
 # ── Install ────────────────────────────────────────────────────────────────
