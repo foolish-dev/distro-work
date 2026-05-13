@@ -5,12 +5,6 @@
 # =============================================================================
 set -euo pipefail
 
-on_error() {
-  local line=$1
-  warn "bootstrap.sh failed at line $line. Check the output above for details."
-}
-trap 'on_error $LINENO' ERR
-
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -22,6 +16,16 @@ NC='\033[0m'
 info() { printf "${BLUE}[*]${NC} %s\n" "$*"; }
 ok() { printf "${GREEN}[+]${NC} %s\n" "$*"; }
 warn() { printf "${RED}[!]${NC} %s\n" "$*"; }
+
+# ERR trap calls warn(), so it must be registered AFTER warn is defined --
+# otherwise a failure between trap setup and the warn definition would die
+# with "warn: command not found" instead of the friendly handler message.
+on_error() {
+  local line=$1
+  warn "bootstrap.sh failed at line $line. Check the output above for details."
+}
+trap 'on_error $LINENO' ERR
+
 banner() {
   printf '%b' "$CYAN"
   cat <<'EOF'
