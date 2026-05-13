@@ -441,13 +441,12 @@ PKG_BLACKARCH=(
   yersinia
 
   # ── Privilege escalation / post-exploitation ───────────────────────────
-  linpeas
+  peass
   pspy
   linenum
   linux-exploit-suggester
   mimikatz
   bloodhound
-  sharphound
   chisel
   ligolo-ng
   pwncat
@@ -529,7 +528,6 @@ PKG_BLACKARCH=(
   # ── Secret scanning / supply chain ─────────────────────────────────────
   trufflehog
   gitleaks
-  notify
   proxify
   interactsh-client
   simplehttpserver
