@@ -86,7 +86,7 @@ curl -fsSL https://raw.githubusercontent.com/foolish-dev/niri-dotfiles/main/boot
 ```bash
 git clone https://github.com/foolish-dev/niri-dotfiles.git ~/niri-dotfiles
 cd ~/niri-dotfiles
-./install.sh         # Arch only -- adds BlackArch + Chaotic AUR repos, installs 250+ packages
+./install.sh         # Arch only -- adds BlackArch + Chaotic AUR repos, installs ~370 packages
 ./deploy.sh          # symlinks all configs into ~/.config/
 dotfiles-check       # verify the deploy took (failed units, broken symlinks)
 ```
