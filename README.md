@@ -18,6 +18,7 @@
   <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python"/>
   <img src="https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=go&logoColor=white" alt="Go"/>
   <img src="https://img.shields.io/badge/License-MIT-7aa2f7?style=flat-square" alt="MIT License"/>
+  <a href="https://buymeacoffee.com/cardoffoolm"><img src="https://img.shields.io/badge/%E2%98%95%20Buy%20me%20a%20coffee-e0af68?style=flat-square&logo=buymeacoffee&logoColor=1a1b26" alt="Buy me a coffee"/></a>
 </p>
 
 <p align="center">
