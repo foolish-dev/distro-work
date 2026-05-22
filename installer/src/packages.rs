@@ -86,7 +86,6 @@ const SHELL: &[&str] = &[
     "tree",
     "btop",
     "fastfetch",
-    "python-pywal",
     "less",
     "man-db",
 ];

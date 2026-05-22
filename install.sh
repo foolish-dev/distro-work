@@ -182,7 +182,6 @@ PKG_SHELL=(
   tree
   btop
   fastfetch
-  python-pywal
   less
   man-db
 )
