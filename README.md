@@ -52,7 +52,7 @@
 | Git | delta side-by-side diffs, 30+ aliases, lazygit TUI |
 | Launcher | Noctalia app launcher (`Mod+Space` / `Mod+D`) + Fuzzel |
 | Display Manager | [SDDM](https://github.com/sddm/sddm) (9 themes, noctalia default, `sddm-theme` switcher) |
-| Theme | Tokyo Night (dark, transparent) + [pywal](https://github.com/dylanaraps/pywal) (wallpaper-driven colors) |
+| Theme | [grogu](https://github.com/foolish-dev/grogu) (wallpaper-driven palette propagation to Noctalia / niri / kitty / ghostty / tmux / nvim) + Tokyo Night fallback |
 | Wallpapers | 23 curated Tokyo Night wallpapers (Arch, cyberpunk, Japanese art, minimal) |
 | Fetch | fastfetch (system info on shell start) |
 
@@ -113,21 +113,21 @@ First `nvim` launch auto-installs all plugins and LSP servers.
   niri/config.kdl              compositor keybinds, layout, window rules
   noctalia/
     settings.json              bar, dock, panels, launcher settings
-    colors.json                Tokyo Night material colors (pywal-managed)
+                               (colors.json + colorschemes/Grogu/ written by grogu, gitignored)
   nvim/
     init.lua                   lazy.nvim bootstrap
     lua/config/                options, keymaps, autocmds
     lua/plugins/               colorscheme, treesitter, lsp, editor, ui, coding
-  kitty/kitty.conf             terminal (0.90 opacity, pywal + Tokyo Night fallback)
+  kitty/kitty.conf             terminal (0.90 opacity, grogu + Tokyo Night fallback)
   tmux/tmux.conf               multiplexer (vim nav, popups, Tokyo Night)
   lazygit/config.yml           git TUI (delta pager, Tokyo Night)
   fuzzel/fuzzel.ini            app launcher
   starship.toml                prompt
   opencode/opencode.json       AI agent config (LM Studio provider, HexStrike MCP)
-  wal/templates/               pywal templates (kitty, noctalia, tmux)
+  wal/templates/               pywal templates (kitty, noctalia, tmux) -- legacy, superseded by grogu
   neofetch/                    system fetch display (fallback for fastfetch)
   systemd/user/                cliphist, awww, hexstrike-server, llama-crow9b services + fwupd-check service/timer
-.zshrc                         shell -- 80+ aliases, BlackArch tool shortcuts, pywal init
+.zshrc                         shell -- 80+ aliases, BlackArch tool shortcuts
 .gitconfig                     delta diffs, 30+ aliases, nvim mergetool
 .gitignore_global              universal project ignores
 .editorconfig                  per-language formatting rules
@@ -137,7 +137,7 @@ First `nvim` launch auto-installs all plugins and LSP servers.
   dev                          3-pane tmux IDE session
   gclone                       smart git clone (gh:user/repo shorthand)
   cheat                        quick reference sheets (nmap, ffuf, revshells, blackarch, privesc, ad, git, docker, tmux, nvim)
-  wallpaper                    set wallpaper + regenerate pywal colors + reload kitty/noctalia
+  wallpaper                    legacy pywal-based wallpaper setter -- superseded by Noctalia's picker (Super+W) calling grogu
   hexstrike-mcp                MCP stdio bridge to HexStrike AI server
   sddm-theme                   fzf-powered SDDM theme switcher
   colorbars                    display full 256-color terminal palette
@@ -354,22 +354,51 @@ telia --auto                     # no confirmation prompts
 
 <img src="assets/divider.svg" alt="" width="900"/>
 
-## Pywal
+## grogu — wallpaper-driven theme propagation
 
-[pywal](https://github.com/dylanaraps/pywal) generates a color scheme from your wallpaper and applies it to kitty, noctalia, and the terminal.
+[grogu](https://github.com/foolish-dev/grogu) is a standalone Rust binary
+that extracts a palette from the current wallpaper (k-means clustering in
+CIE Lab, accents pulled toward canonical hues) and writes it into every
+theming target on the desktop in one shot. Press `Super+W` to open
+Noctalia's wallpaper picker — selecting a wallpaper fires the
+`hooks.wallpaperChange` script in
+`~/.config/noctalia/settings.json`:
 
 ```bash
-wallpaper ~/Pictures/bg.jpg    # set wallpaper + regenerate all colors
+$HOME/.cargo/bin/grogu apply --extract="$1" --reload
 ```
 
-The `wallpaper` script:
-1. Runs `wal -i` to generate colors
-2. Sets the wallpaper via `awww img` with a grow transition
-3. Live-reloads kitty colors
-4. Copies the generated `colors-noctalia.json` into noctalia's config
-5. Reloads tmux colors in every running server (iterates `/tmp/tmux-$UID/*` sockets)
+What lands where:
 
-Tokyo Night is the static fallback before the first `wal` run.
+| Target | What grogu writes | How it picks up the change |
+|---|---|---|
+| **Noctalia** | `~/.config/noctalia/colors.json` (flat m-color map) + `colorschemes/Grogu/Grogu.json` (full scheme + ANSI), sets `colorSchemes.predefinedScheme = "Grogu"` | `Color.qml` file-watches `colors.json` with `watchChanges: true` — live-reloads every binding |
+| **niri** | `~/.config/niri/grogu.kdl` (focus-ring colours) | niri live-reloads on save |
+| **kitty** | `~/.config/kitty/grogu.conf` | `--reload` sends `SIGUSR1` to every running kitty |
+| **ghostty** | `~/.config/ghostty/themes/grogu` | ghostty live-reloads on save |
+| **tmux** | `~/.config/tmux/grogu.conf` | `--reload` runs `tmux -S <socket> source-file` on every live socket |
+| **nvim** | `~/.config/nvim/colors/grogu.vim` | Activate with `:colorscheme grogu` |
+| **telia** | `prefs.theme` row in telia's sqlite | picked up on next launch |
+
+Three predefined themes also ship — `tokyo-night`, `catppuccin`,
+`dracula` — usable without an extract:
+
+```bash
+grogu apply --theme catppuccin       # lock to a built-in
+grogu apply --theme tokyo-night      # default fallback
+grogu paths                          # everywhere grogu reads / writes
+grogu extract /path/to/img.jpg       # preview palette without writing
+```
+
+Bootstrap and wiring:
+
+- `install.sh` installs grogu via `cargo install --git https://github.com/foolish-dev/grogu --branch main --locked` → `~/.cargo/bin/grogu`.
+- `deploy.sh` symlinks the niri / kitty / tmux / nvim / ghostty config trees that include grogu's output files.
+- `~/.config/noctalia/settings.json` has `hooks.enabled = true` and `hooks.wallpaperChange` set to the grogu command above.
+- `~/.config/niri/config.kdl` does `include "grogu.kdl"` and binds `Super+W` to `qs -c noctalia-shell ipc call wallpaper toggle`.
+- `.gitignore` excludes all of grogu's output files (`grogu.conf` / `grogu.kdl` / `grogu.vim` / `colors.json` / `colorschemes/`) — they're generated, not source.
+
+Tokyo Night is the static fallback before the first `grogu apply` run.
 
 <img src="assets/divider.svg" alt="" width="900"/>
 
@@ -413,7 +442,12 @@ The switcher handles config deployment, wallpaper copying, and SDDM metadata pat
 | Abstract | `abstract-lock`, `fly` |
 
 ```bash
-wallpaper ~/Pictures/Wallpapers/samurai.png    # set + regenerate pywal colors
+# Pick interactively — Super+W opens Noctalia's wallpaper panel; selection
+# fires the wallpaperChange hook → grogu repaints every target.
+qs -c noctalia-shell ipc call wallpaper toggle
+
+# Or set a specific image directly:
+qs -c noctalia-shell ipc call wallpaper set ~/Pictures/Wallpapers/samurai.png
 ```
 
 Sourced from [tokyo-night/wallpapers](https://github.com/tokyo-night/wallpapers) (MIT), [czechbol/tokyonight-backgrounds](https://github.com/czechbol/tokyonight-backgrounds) (CC), and [atraxsrc/tokyonight-wallpapers](https://github.com/atraxsrc/tokyonight-wallpapers) (GPL-2.0).
@@ -545,10 +579,11 @@ gclone user/repo                   # Clone from GitHub + cd
 gclone gh:user/repo                # GitHub shorthand
 gclone gl:user/repo                # GitLab shorthand
 
-# Pywal / theming
-wallpaper ~/Pictures/bg.jpg        # Set wallpaper + regenerate colors
-sddm-theme                         # fzf picker for all installed themes
-sddm-theme tokyo-night             # switch SDDM theme directly
+# grogu / theming
+qs -c noctalia-shell ipc call wallpaper toggle   # Open Noctalia's wallpaper picker (Super+W)
+grogu apply --theme catppuccin                   # Lock to a predefined theme (no extract)
+sddm-theme                                       # fzf picker for all installed themes
+sddm-theme tokyo-night                           # switch SDDM theme directly
 
 # Terminal utilities
 colorbars                          # Show full 256-color palette
