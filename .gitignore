@@ -45,3 +45,6 @@ Thumbs.db
 # Backups created by deploy.sh
 .dotfiles-backup/
 backups/
+
+# Tool-written migration/rotation backups (e.g. opencode's *.tui-migration.bak)
+*.bak
