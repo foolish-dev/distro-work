@@ -48,3 +48,6 @@ backups/
 
 # Tool-written migration/rotation backups (e.g. opencode's *.tui-migration.bak)
 *.bak
+
+# Cargo build artifacts (installer/ and any future Rust subproject)
+target/
