@@ -84,3 +84,24 @@ jobs:
           done
           exit $fail
         shell: bash
+
+  rust:
+    name: Rust (build + clippy)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: installer
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Install clippy component
+        run: rustup component add clippy
+
+      - name: Show toolchain
+        run: rustc --version && cargo --version && cargo clippy --version
+
+      - name: cargo build --release --locked
+        run: cargo build --release --locked
+
+      - name: cargo clippy -- -D warnings
+        run: cargo clippy --release --locked --all-targets -- -D warnings
