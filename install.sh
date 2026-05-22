@@ -647,6 +647,19 @@ info "Installing HexStrike Python dependencies ..."
 ok "HexStrike dependencies installed."
 info "  hexstrike-server.service is enabled by deploy.sh (unit ships with it)."
 
+# ── Telia (own TUI coding agent) ──────────────────────────────────────────
+# Cargo-install from the upstream repo so the binary lives at
+# ~/.cargo/bin/telia (already on $PATH via .zshrc). Skips when already
+# present; re-run with `cargo install --force ...` to rebuild from latest.
+if ! command -v telia &>/dev/null; then
+  info "Installing telia (TUI coding agent) ..."
+  cargo install --git https://github.com/foolish-dev/telia \
+    --branch dev --locked telia-cli
+  ok "telia installed -> ~/.cargo/bin/telia"
+else
+  ok "telia already installed (use 'cargo install --force ...' to rebuild)."
+fi
+
 # ── Screenshots dir ────────────────────────────────────────────────────────
 mkdir -p ~/Pictures/Screenshots
 

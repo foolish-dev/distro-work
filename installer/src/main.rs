@@ -393,6 +393,26 @@ fn install_hexstrike() -> Result<()> {
     Ok(())
 }
 
+// `cargo install` from the upstream repo so the binary lands at
+// ~/.cargo/bin/telia (already on $PATH via .zshrc). Skip if already
+// installed; re-run with `cargo install --force ...` to rebuild.
+fn install_telia() -> Result<()> {
+    if command_exists("telia") {
+        ok("telia already installed (use 'cargo install --force ...' to rebuild).");
+        return Ok(());
+    }
+    info("Installing telia (TUI coding agent) ...");
+    run("cargo", &[
+        "install",
+        "--git", "https://github.com/foolish-dev/telia",
+        "--branch", "dev",
+        "--locked",
+        "telia-cli",
+    ])?;
+    ok("telia installed -> ~/.cargo/bin/telia");
+    Ok(())
+}
+
 fn ensure_screenshots_dir() -> Result<()> {
     fs::create_dir_all(home()?.join("Pictures/Screenshots"))?;
     Ok(())
@@ -432,6 +452,7 @@ fn real_main() -> Result<()> {
     install_zinit()?;
     decompress_rockyou()?;
     install_hexstrike()?;
+    install_telia()?;
     ensure_screenshots_dir()?;
 
     println!();

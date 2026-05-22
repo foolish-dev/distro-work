@@ -45,7 +45,7 @@
 | Multiplexer | tmux (Ctrl-a prefix, lazygit/btop/fzf popups) |
 | Shell | Zsh + Zinit + Starship |
 | Editor | Neovim (lazy.nvim, 16 LSP servers, DAP, Treesitter) |
-| AI / LLM | [LM Studio](https://lmstudio.ai) (local models) + [OpenCode](https://opencode.ai) (AI coding agent) |
+| AI / LLM | [LM Studio](https://lmstudio.ai) (local models) + [OpenCode](https://opencode.ai) + [Telia](https://github.com/foolish-dev/telia) (AI coding agents) |
 | AI Security | [HexStrike AI](https://github.com/0x4m4/hexstrike-ai) MCP (150+ security tools via MCP) |
 | Audio | PipeWire + WirePlumber (pipewire-pulse, pipewire-alsa, pipewire-jack) |
 | Network | NetworkManager + iwd backend |
@@ -334,6 +334,22 @@ The [`SuperClaude-Org/heimdall_opencode`](https://github.com/SuperClaude-Org/hei
 ```bash
 # Refresh to the latest upstream heimdall commit on its dev branch
 git submodule update --remote --merge .config/opencode/heimdall_opencode
+```
+
+<img src="assets/divider.svg" alt="" width="900"/>
+
+## Telia
+
+[Telia (τέλεια)](https://github.com/foolish-dev/telia) is a single-binary TUI coding agent — talks to local Ollama or any of ~20 cloud chat-completions endpoints (~210 named models), runs 25 built-in tools (read/write/edit, bash, list/glob/grep, head/tail/tree/stat/diff, apply_patch, lint/format/typecheck), hosts MCP servers, and persists sessions to SQLite.
+
+The installer runs `cargo install --git https://github.com/foolish-dev/telia --branch dev --locked telia-cli`, dropping the binary at `~/.cargo/bin/telia` (already on `$PATH` via `.zshrc`). Lives alongside OpenCode rather than replacing it — OpenCode for editor-integrated work, Telia for plain-TUI sessions.
+
+```bash
+telia                            # local Ollama (default: hf.co/FoolDev/Thanatos-27B)
+telia --model claude-opus-4-7    # cloud (uses $ANTHROPIC_API_KEY, prompts otherwise)
+telia --resume                   # pick up the last session (alias: -r, --continue)
+telia --plan                     # read-only tools, no mutations
+telia --auto                     # no confirmation prompts
 ```
 
 <img src="assets/divider.svg" alt="" width="900"/>
