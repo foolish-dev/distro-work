@@ -413,6 +413,22 @@ fn install_telia() -> Result<()> {
     Ok(())
 }
 
+fn install_grogu() -> Result<()> {
+    if command_exists("grogu") {
+        ok("grogu already installed (use 'cargo install --force ...' to rebuild).");
+        return Ok(());
+    }
+    info("Installing grogu (wallpaper-driven theme propagator) ...");
+    run("cargo", &[
+        "install",
+        "--git", "https://github.com/foolish-dev/grogu",
+        "--branch", "main",
+        "--locked",
+    ])?;
+    ok("grogu installed -> ~/.cargo/bin/grogu");
+    Ok(())
+}
+
 fn ensure_screenshots_dir() -> Result<()> {
     fs::create_dir_all(home()?.join("Pictures/Screenshots"))?;
     Ok(())
@@ -453,6 +469,7 @@ fn real_main() -> Result<()> {
     decompress_rockyou()?;
     install_hexstrike()?;
     install_telia()?;
+    install_grogu()?;
     ensure_screenshots_dir()?;
 
     println!();

@@ -660,6 +660,15 @@ else
   ok "telia already installed (use 'cargo install --force ...' to rebuild)."
 fi
 
+if ! command -v grogu &>/dev/null; then
+  info "Installing grogu (wallpaper-driven theme propagator) ..."
+  cargo install --git https://github.com/foolish-dev/grogu \
+    --branch main --locked
+  ok "grogu installed -> ~/.cargo/bin/grogu"
+else
+  ok "grogu already installed (use 'cargo install --force ...' to rebuild)."
+fi
+
 # ── Screenshots dir ────────────────────────────────────────────────────────
 mkdir -p ~/Pictures/Screenshots
 
