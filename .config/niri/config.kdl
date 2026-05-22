@@ -73,7 +73,7 @@ input {
 // Layout
 // ---------------------------------------------------------------------------
 layout {
-    gaps 10
+    gaps 14
 
     center-focused-column "never"
 
@@ -88,22 +88,21 @@ layout {
     }
 
     focus-ring {
-        width 2
-        active-color "#7aa2f7"
-        inactive-color "#24283b"
+        off
     }
 
     border {
         off
     }
 
+    // Deeper, softer drop shadow for the floating-glass aesthetic.
     shadow {
         on
-        softness 12
-        spread 2
-        offset x=0 y=4
-        color "#00000064"
-        inactive-color "#00000032"
+        softness 24
+        spread 3
+        offset x=0 y=6
+        color "#000000aa"
+        inactive-color "#00000055"
     }
 
     struts {
@@ -120,10 +119,20 @@ layout {
 // ---------------------------------------------------------------------------
 // Window rules  (Noctalia integration + general)
 // ---------------------------------------------------------------------------
-// Rounded corners for all windows.
+// Rounded corners + transparency. niri does not blur windows itself
+// (no compositor blur); apps like kitty/ghostty handle their own blur.
+// Opacity here stacks multiplicatively with the app's own opacity.
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 14
     clip-to-geometry true
+    opacity 0.98
+}
+
+// Focused window is more transparent so the wallpaper bleeds through
+// the one you're actively working in.
+window-rule {
+    match is-focused=true
+    opacity 0.88
 }
 
 // Float specific utility windows.
@@ -150,6 +159,18 @@ window-rule {
 layer-rule {
     match namespace="^noctalia-overview*"
     place-within-backdrop true
+}
+
+// Round the corners of overlay surfaces (launchers, notifications, OSDs)
+// so fuzzel + noctalia panels match the window aesthetic.
+layer-rule {
+    match namespace="^launcher$"
+    geometry-corner-radius 16
+}
+
+layer-rule {
+    match namespace="^noctalia-.*"
+    geometry-corner-radius 14
 }
 
 // ---------------------------------------------------------------------------
