@@ -437,3 +437,10 @@ BANNER
 fi
 
 
+
+# bun completions
+[ -s "/home/fool/.bun/_bun" ] && source "/home/fool/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
