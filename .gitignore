@@ -60,3 +60,7 @@ target/
 .config/tmux/grogu.conf
 .config/ghostty/themes/grogu
 .config/nvim/colors/grogu.vim
+# Noctalia's live palette (rewritten by grogu's extract on every wallpaper
+# change via the wallpaperChange hook) and the matching scheme file.
+.config/noctalia/colors.json
+.config/noctalia/colorschemes/
