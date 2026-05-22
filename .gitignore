@@ -51,3 +51,12 @@ backups/
 
 # Cargo build artifacts (installer/ and any future Rust subproject)
 target/
+
+# grogu — wallpaper-driven palette files regenerated on every Meta+W pick.
+# These are generated output (palette extracted from the current wallpaper),
+# not source. See https://github.com/foolish-dev/grogu.
+.config/kitty/grogu.conf
+.config/niri/grogu.kdl
+.config/tmux/grogu.conf
+.config/ghostty/themes/grogu
+.config/nvim/colors/grogu.vim

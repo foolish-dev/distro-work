@@ -483,4 +483,11 @@ binds {
     // Launcher already bound above (Mod+D, Mod+Space).
     Mod+S     { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
     Mod+Comma { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
+    // Opens Noctalia's wallpaper selector. Picking a wallpaper fires
+    // Noctalia's `wallpaperChange` hook, which runs grogu to repaint
+    // niri/kitty/ghostty/tmux/vim/telia + Noctalia itself.
+    Mod+W     { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle"; }
 }
+
+// grogu — wallpaper-driven focus-ring colours, regenerated on every Meta+W pick.
+include "grogu.kdl"
