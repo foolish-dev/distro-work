@@ -73,9 +73,15 @@ fn run_in(dir: &Path, prog: &str, args: &[&str]) -> Result<()> {
     Ok(())
 }
 
+// Best-effort runner: returns bool, silences stdout+stderr. Mirrors bash's
+// `cmd &>/dev/null || true` / `cmd 2>/dev/null || warn ...` pattern so the
+// terminal stays clean on systems where (e.g.) docker.service or
+// power-profiles-daemon isn't installed yet.
 fn run_ok(prog: &str, args: &[&str]) -> bool {
     Command::new(prog)
         .args(args)
+        .stdout(Stdio::null())
+        .stderr(Stdio::null())
         .status()
         .map(|s| s.success())
         .unwrap_or(false)

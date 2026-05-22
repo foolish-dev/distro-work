@@ -39,9 +39,15 @@ fn run(prog: &str, args: &[&str]) -> Result<()> {
     Ok(())
 }
 
+// Best-effort runner: returns bool, silences stdout+stderr. Matches the
+// bash `cmd 2>/dev/null || true` / `cmd 2>/dev/null || warn ...` pattern
+// so failures on optional services (hexstrike not yet installed,
+// noctalia SDDM theme not present) stay quiet until our own warn fires.
 fn run_ok(prog: &str, args: &[&str]) -> bool {
     Command::new(prog)
         .args(args)
+        .stdout(Stdio::null())
+        .stderr(Stdio::null())
         .status()
         .map(|s| s.success())
         .unwrap_or(false)
