@@ -2,7 +2,7 @@
 name = "niri-installer"
 version = "0.1.0"
 edition = "2021"
-description = "Rust port of install.sh: Arch + BlackArch package bootstrap for niri-dotfiles."
+description = "Rust port of install.sh + deploy.sh for niri-dotfiles."
 license = "MIT"
 
 [dependencies]
@@ -11,6 +11,10 @@ anyhow = "1"
 [[bin]]
 name = "niri-install"
 path = "src/main.rs"
+
+[[bin]]
+name = "niri-deploy"
+path = "src/deploy.rs"
 
 [profile.release]
 strip = true
