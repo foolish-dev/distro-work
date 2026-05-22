@@ -2,28 +2,67 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/header.svg"/>
     <source media="(prefers-color-scheme: light)" srcset="assets/header-light.svg"/>
-    <img src="assets/header.svg" alt="Dotfiles — Arch Linux + BlackArch + Niri + Noctalia + Tokyo Night" width="900"/>
+    <img src="assets/header.svg" alt="niri-dotfiles — Arch + Niri + Noctalia + grogu + Telia + 300+ BlackArch tools" width="900"/>
   </picture>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Arch_Linux-1793D1?style=flat-square&logo=archlinux&logoColor=white" alt="Arch Linux"/>
   <img src="https://img.shields.io/badge/Wayland-FFBc00?style=flat-square&logo=wayland&logoColor=black" alt="Wayland"/>
+  <img src="https://img.shields.io/badge/Niri-7aa2f7?style=flat-square&logoColor=white" alt="Niri"/>
   <img src="https://img.shields.io/badge/Neovim-57A143?style=flat-square&logo=neovim&logoColor=white" alt="Neovim"/>
   <img src="https://img.shields.io/badge/Zsh-F15A24?style=flat-square&logo=zsh&logoColor=white" alt="Zsh"/>
   <img src="https://img.shields.io/badge/tmux-1BB91F?style=flat-square&logo=tmux&logoColor=white" alt="tmux"/>
   <img src="https://img.shields.io/badge/Kitty-000000?style=flat-square&logo=gnometerminal&logoColor=white" alt="Kitty"/>
-  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker"/>
-  <img src="https://img.shields.io/badge/Rust-000000?style=flat-square&logo=rust&logoColor=white" alt="Rust"/>
-  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python"/>
-  <img src="https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=go&logoColor=white" alt="Go"/>
+  <img src="https://img.shields.io/badge/Rust-bb9af7?style=flat-square&logo=rust&logoColor=white" alt="Rust"/>
   <img src="https://img.shields.io/badge/License-MIT-7aa2f7?style=flat-square" alt="MIT License"/>
   <a href="https://buymeacoffee.com/cardoffoolm"><img src="https://img.shields.io/badge/%E2%98%95%20Buy%20me%20a%20coffee-e0af68?style=flat-square&logo=buymeacoffee&logoColor=1a1b26" alt="Buy me a coffee"/></a>
 </p>
 
 <p align="center">
-  Personal dotfiles for a scrollable-tiling Wayland desktop built for coding and offensive security.
+  Personal dotfiles for a scrollable-tiling Wayland desktop built for coding and offensive security.<br/>
+  <sub>One <code>curl | bash</code> on a fresh Arch install → niri, Noctalia, a wallpaper-reactive theme, two AI coding agents, and 300+ BlackArch tools.</sub>
 </p>
+
+<img src="assets/divider.svg" alt="" width="900"/>
+
+## What's distinct
+
+- **[grogu](https://github.com/foolish-dev/grogu)** extracts a palette from the current wallpaper and repaints Noctalia / niri / kitty / ghostty / tmux / nvim / Telia in one shot. Press `Super+W` → Noctalia's picker → every target live-reloads.
+- **[Telia](https://github.com/foolish-dev/telia)** is a single-binary TUI coding agent — local Ollama or ~20 cloud endpoints, 25 built-in tools, MCP servers, SQLite session history. `Super+T` opens it in a floating panel.
+- **[OpenCode](https://opencode.ai)** lives alongside Telia, configured with LM Studio + Ollama providers and 10 MCP servers (HexStrike, Context7, GitHub, filesystem, fetch, Playwright, sequential-thinking, memory, git, weather).
+- **[HexStrike AI](https://github.com/0x4m4/hexstrike-ai)** MCP exposes 150+ offensive-security tools to those agents over a Flask backend on `127.0.0.1:8888`.
+- **[BlackArch](https://blackarch.org) + [Chaotic AUR](https://aur.chaotic.cx)** repos pre-wired by the installer; 300+ pentest tools across 19 categories plus 147 launcher entries that open in kitty.
+- **[niri](https://github.com/YaLTeR/niri) 26.04** scrollable-tiling Wayland compositor with **[Noctalia](https://github.com/noctalia-dev/noctalia-shell)** as the shell (bar, dock, panels, notifications, lock screen, app launcher).
+- **Tokyo Night** is the static fallback before the first wallpaper-driven repaint.
+
+<img src="assets/divider.svg" alt="" width="900"/>
+
+## Quick start
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/foolish-dev/niri-dotfiles/main/bootstrap.sh | bash
+```
+
+Manual:
+
+```bash
+git clone https://github.com/foolish-dev/niri-dotfiles.git ~/niri-dotfiles
+cd ~/niri-dotfiles
+./install.sh         # adds BlackArch + Chaotic AUR, installs ~370 packages, cargo-installs grogu + Telia
+./deploy.sh          # symlinks every config tree into ~/.config/, prompts for git identity
+dotfiles-check       # post-deploy health check (failed units, broken symlinks)
+```
+
+First `nvim` launch auto-installs every plugin and LSP server via lazy.nvim + Mason.
+
+> **Git identity is automatic.** `deploy.sh` generates `~/.gitconfig.local` (gitignored, per-machine) and prompts for name + email. Override non-interactively:
+>
+> ```bash
+> GIT_USER_NAME="Your Name" GIT_USER_EMAIL="you@example.com" ./deploy.sh
+> ```
+>
+> **Per-machine zsh overrides.** The tracked `.zshrc` sources `~/.zshrc.local` (untracked) as its final step. Drop ROCm/CUDA env, work secrets, or private aliases there.
 
 <img src="assets/divider.svg" alt="" width="900"/>
 
@@ -32,39 +71,36 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/stack.svg"/>
   <source media="(prefers-color-scheme: light)" srcset="assets/stack-light.svg"/>
-  <img src="assets/stack.svg" alt="Architecture — Arch, Niri, Noctalia, Neovim, Docker, LM Studio stack diagram" width="900"/>
+  <img src="assets/stack.svg" alt="Architecture — Arch / Niri / Noctalia / grogu / Telia / BlackArch + AI stack" width="900"/>
 </picture>
 
 | Layer | Tool |
 |---|---|
-| Distro | Arch Linux + [BlackArch](https://blackarch.org) + [Chaotic AUR](https://aur.chaotic.cx) repos |
-| Compositor | [Niri](https://github.com/YaLTeR/niri) (scrollable tiling, Wayland) |
-| Desktop Shell | [Noctalia](https://github.com/noctalia-dev/noctalia-shell) (bar, dock, panels, notifications, lock screen) |
-| File Manager | Thunar (`Super+E`) |
-| Terminal | Kitty |
+| Distro | Arch Linux + [BlackArch](https://blackarch.org) + [Chaotic AUR](https://aur.chaotic.cx) |
+| Compositor | [niri](https://github.com/YaLTeR/niri) (scrollable tiling, Wayland) |
+| Desktop shell | [Noctalia](https://github.com/noctalia-dev/noctalia-shell) (bar, dock, panels, launcher, lock screen) |
+| Terminal | Kitty (0.90 opacity, hosts tmux) |
 | Multiplexer | tmux (Ctrl-a prefix, lazygit/btop/fzf popups) |
-| Shell | Zsh + Zinit + Starship |
-| Editor | Neovim (lazy.nvim, 16 LSP servers, DAP, Treesitter) |
-| AI / LLM | [LM Studio](https://lmstudio.ai) (local models) + [OpenCode](https://opencode.ai) + [Telia](https://github.com/foolish-dev/telia) (AI coding agents) |
-| AI Security | [HexStrike AI](https://github.com/0x4m4/hexstrike-ai) MCP (150+ security tools via MCP) |
-| Audio | PipeWire + WirePlumber (pipewire-pulse, pipewire-alsa, pipewire-jack) |
-| Network | NetworkManager + iwd backend |
-| Git | delta side-by-side diffs, 30+ aliases, lazygit TUI |
-| Launcher | Noctalia app launcher (`Mod+Space` / `Mod+D`) + Fuzzel |
-| Display Manager | [SDDM](https://github.com/sddm/sddm) (9 themes, noctalia default, `sddm-theme` switcher) |
-| Theme | [grogu](https://github.com/foolish-dev/grogu) (wallpaper-driven palette propagation to Noctalia / niri / kitty / ghostty / tmux / nvim) + Tokyo Night fallback |
-| Wallpapers | 23 curated Tokyo Night wallpapers (Arch, cyberpunk, Japanese art, minimal) |
-| Fetch | fastfetch (system info on shell start) |
+| Shell | Zsh + Zinit + Starship + vi-mode |
+| Editor | Neovim — lazy.nvim, 16 LSP servers, DAP, Treesitter |
+| Theme propagation | **[grogu](https://github.com/foolish-dev/grogu)** (wallpaper → Noctalia / niri / kitty / ghostty / tmux / nvim / Telia) |
+| AI coding agents | **[Telia](https://github.com/foolish-dev/telia)** (TUI) + [OpenCode](https://opencode.ai) (editor-integrated) |
+| Local LLM | [LM Studio](https://lmstudio.ai) on `127.0.0.1:1234` + Ollama |
+| AI security | [HexStrike AI](https://github.com/0x4m4/hexstrike-ai) MCP — 150+ tools over `127.0.0.1:8888` |
+| Display manager | [SDDM](https://github.com/sddm/sddm) — 9 themes, `sddm-theme` switcher |
+| File manager | Thunar (`Super+E`) |
+| Audio | PipeWire + WirePlumber |
+| Network | NetworkManager + iwd |
+| Git | delta diffs, lazygit TUI, 30+ aliases |
+| Wallpapers | 23 curated 4K wallpapers (Arch, cyberpunk, Japanese art, minimal) |
+| Fallback theme | Tokyo Night |
 
 <img src="assets/divider.svg" alt="" width="900"/>
 
 ## Screenshots
 
-<!-- Capture via niri: Print (region), Mod+Print (screen), Mod+Shift+Print (window).
-     Drop PNGs in ./screenshots/ and reference them below. -->
-
 <p align="center">
-  <img src="screenshots/desktop.png" alt="Niri + Noctalia desktop (cafe-at-night wallpaper)" width="900"/>
+  <img src="screenshots/desktop.png" alt="niri + Noctalia desktop" width="900"/>
 </p>
 
 | | |
@@ -72,278 +108,44 @@
 | <img src="screenshots/noctalia-launcher.png" alt="Launcher" width="440"/> | <img src="screenshots/nvim.png" alt="Neovim" width="440"/> |
 | <img src="screenshots/noctalia-control.png" alt="Control Center" width="440"/> | <img src="screenshots/terminal.png" alt="Terminal" width="440"/> |
 
+> Re-capture with `./screenshots/capture.sh` (interactive: prompts for each window, runs `grim` with a configurable delay).
+
 <img src="assets/divider.svg" alt="" width="900"/>
 
-## Quick Start
+## grogu — wallpaper-driven theme propagation
 
-**One-liner (fresh Arch install):**
+[grogu](https://github.com/foolish-dev/grogu) is a standalone Rust binary that extracts a palette from the current wallpaper (k-means clustering in CIE Lab, accents pulled toward canonical hues) and writes it into every theming target on the desktop in one shot. Press `Super+W` → Noctalia's wallpaper picker → the `hooks.wallpaperChange` script in `~/.config/noctalia/settings.json` fires:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/foolish-dev/niri-dotfiles/main/bootstrap.sh | bash
+$HOME/.cargo/bin/grogu apply --extract="$1" --reload
 ```
 
-**Manual install:**
+| Target | What grogu writes | How it picks up the change |
+|---|---|---|
+| **Noctalia** | `colors.json` (flat m-color map) + `colorschemes/Grogu/Grogu.json`; sets `predefinedScheme = "Grogu"` | `Color.qml` file-watches `colors.json`, live-reloads every binding |
+| **niri** | `~/.config/niri/grogu.kdl` (focus-ring colours) | niri live-reloads on save |
+| **kitty** | `~/.config/kitty/grogu.conf` | `--reload` sends `SIGUSR1` to every running kitty |
+| **ghostty** | `~/.config/ghostty/themes/grogu` | ghostty live-reloads on save |
+| **tmux** | `~/.config/tmux/grogu.conf` | `--reload` runs `tmux -S <socket> source-file` on every live socket |
+| **nvim** | `~/.config/nvim/colors/grogu.vim` | Activate with `:colorscheme grogu` |
+| **Telia** | `prefs.theme` row in telia's SQLite | Picked up on next launch |
+
+Three predefined themes also ship, usable without an extract:
 
 ```bash
-git clone https://github.com/foolish-dev/niri-dotfiles.git ~/niri-dotfiles
-cd ~/niri-dotfiles
-./install.sh         # Arch only -- adds BlackArch + Chaotic AUR repos, installs ~370 packages
-./deploy.sh          # symlinks all configs into ~/.config/
-dotfiles-check       # verify the deploy took (failed units, broken symlinks)
+grogu apply --theme catppuccin       # lock to a built-in
+grogu apply --theme tokyo-night      # default fallback
+grogu paths                          # everywhere grogu reads / writes
+grogu extract /path/to/img.jpg       # preview palette without writing
 ```
 
-First `nvim` launch auto-installs all plugins and LSP servers.
-
-> **Git identity is automatic.** `deploy.sh` generates `~/.gitconfig.local` (git-ignored, per-machine) and prompts for your name + email. Override non-interactively with env vars:
->
-> ```bash
-> GIT_USER_NAME="Your Name" GIT_USER_EMAIL="you@example.com" ./deploy.sh
-> ```
->
-> Edit `~/.gitconfig.local` any time — it's `[include]`d by the tracked `.gitconfig`. Commit signing is opt-in (uncomment `signingkey` + `[commit] gpgsign`).
->
-> **Per-machine zsh overrides.** The tracked `.zshrc` sources `~/.zshrc.local` (untracked) as its final step, so anything you put there wins. Use it for hardware-specific env (ROCm `HSA_OVERRIDE_GFX_VERSION`, CUDA paths), private aliases, work secrets, etc. Create it by hand — `deploy.sh` does not generate one.
+The installer runs `cargo install --git https://github.com/foolish-dev/grogu --branch main --locked` → `~/.cargo/bin/grogu`. `.gitignore` excludes every grogu output file (`grogu.{conf,kdl,vim}` / `colors.json` / `colorschemes/`) — they're generated, not source. Tokyo Night is the static fallback before the first run.
 
 <img src="assets/divider.svg" alt="" width="900"/>
 
-## Layout
-
-```text
-.config/
-  niri/config.kdl              compositor keybinds, layout, window rules
-  noctalia/
-    settings.json              bar, dock, panels, launcher settings
-                               (colors.json + colorschemes/Grogu/ written by grogu, gitignored)
-  nvim/
-    init.lua                   lazy.nvim bootstrap
-    lua/config/                options, keymaps, autocmds
-    lua/plugins/               colorscheme, treesitter, lsp, editor, ui, coding
-  kitty/kitty.conf             terminal (0.90 opacity, grogu + Tokyo Night fallback)
-  tmux/tmux.conf               multiplexer (vim nav, popups, Tokyo Night)
-  lazygit/config.yml           git TUI (delta pager, Tokyo Night)
-  fuzzel/fuzzel.ini            app launcher
-  starship.toml                prompt
-  opencode/opencode.json       AI agent config (LM Studio provider, HexStrike MCP)
-  wal/templates/               pywal templates (kitty, noctalia, tmux) -- legacy, superseded by grogu
-  neofetch/                    system fetch display (fallback for fastfetch)
-  systemd/user/                cliphist, awww, hexstrike-server, llama-crow9b services + fwupd-check service/timer
-.zshrc                         shell -- 80+ aliases, BlackArch tool shortcuts
-.gitconfig                     delta diffs, 30+ aliases, nvim mergetool
-.gitignore_global              universal project ignores
-.editorconfig                  per-language formatting rules
-.local/bin/
-  proj                         fuzzy project opener (fzf + tmux)
-  mkproj                       scaffold projects (python/rust/go/c/node/shell)
-  dev                          3-pane tmux IDE session
-  gclone                       smart git clone (gh:user/repo shorthand)
-  cheat                        quick reference sheets (nmap, ffuf, revshells, blackarch, privesc, ad, git, docker, tmux, nvim)
-  wallpaper                    legacy pywal-based wallpaper setter -- superseded by Noctalia's picker (Super+W) calling grogu
-  hexstrike-mcp                MCP stdio bridge to HexStrike AI server
-  sddm-theme                   fzf-powered SDDM theme switcher
-  colorbars                    display full 256-color terminal palette
-  colorblocks                  display basic 16-color palette
-  pipes                        animated pipes screensaver
-  dotfiles-check               post-deploy health check (failed units, symlinks)
-.local/share/applications/     147 BlackArch .desktop entries spanning 15 BlackArch categories
-wallpapers/                    23 curated Tokyo Night wallpapers (4K)
-assets/                        README SVG images (header, dividers, palette, architecture)
-etc/
-  sddm.conf.d/niri.conf       SDDM display manager config (deployed to /etc)
-  sddm-themes/                 custom Tokyo Night astronaut variants (tokyo-night, tokyo-night-cyberpunk)
-bootstrap.sh                   one-liner installer (curl | bash)
-install.sh                     Arch + BlackArch + Chaotic AUR package bootstrap
-deploy.sh                      symlink deployer with auto-backup
-```
-
-<img src="assets/divider.svg" alt="" width="900"/>
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/keybinds.svg"/>
-    <source media="(prefers-color-scheme: light)" srcset="assets/keybinds-light.svg"/>
-    <img src="assets/keybinds.svg" alt="Keybinds section header — Niri, tmux, Neovim modifier key reference" width="900"/>
-  </picture>
-</p>
-
-## Keybinds
-
-### Niri (compositor)
-
-| Key | Action |
-|---|---|
-| `Super+Space` | Noctalia app launcher (toggle) |
-| `Super+D` | Noctalia app launcher |
-| `Super+S` | Noctalia control center |
-| `Super+Comma` | Noctalia settings |
-| `Super+Return` | Terminal |
-| `Super+Shift+Return` | Floating terminal |
-| `Super+B` | Firefox |
-| `Super+N` | Neovim |
-| `Super+T` | Telia (floating TUI coding agent) |
-| `Super+E` | File manager (Thunar) |
-| `Super+H/J/K/L` | Focus window |
-| `Super+Shift+H/J/K/L` | Move window |
-| `Super+1-9` | Workspace |
-| `Super+Tab` | Previous workspace |
-| `Super+F` | Maximize column |
-| `Super+Shift+F` | Fullscreen |
-| `Super+R` | Cycle column width |
-| `Super+Minus/Equal` | Shrink/grow column |
-| `Super+[` / `Super+]` | Consume / expel window from column |
-| `Super+Q` | Close window |
-| `Super+V` | Clipboard history |
-| `Super+Escape` | Lock screen |
-| `Super+Shift+P` | Power off monitors |
-| `Super+Shift+E` | Quit niri |
-| `Super+Shift+C` | Reload niri config |
-| `Super+Shift+/` | Show hotkey overlay (all keybinds) |
-| `Super+O` | Toggle on-screen keyboard (wvkbd, tablet mode) |
-| `Super+Ctrl+M` | msfconsole |
-| `Super+Ctrl+W` | Wireshark |
-| `Super+Ctrl+B` | Burp Suite |
-| `Super+Ctrl+N` | Nmap terminal |
-| `Super+Ctrl+T` | btop |
-| `Super+Ctrl+A` | LM Studio |
-| `Print` | Screenshot region |
-| `Super+Print` | Screenshot screen |
-| `Super+Shift+Print` | Screenshot window |
-
-### Tmux (prefix = Ctrl-a)
-
-| Key | Action |
-|---|---|
-| `C-a \|` | Split horizontal |
-| `C-a -` | Split vertical |
-| `C-a h/j/k/l` | Navigate panes |
-| `C-a H/J/K/L` | Resize pane |
-| `C-a >`/`<` | Swap pane down/up |
-| `C-a g` | Lazygit popup |
-| `C-a b` | btop popup |
-| `C-a f` | fzf file opener |
-| `C-a c` | New window |
-| `C-a C-h/C-l` | Prev/next window |
-| `C-a Tab` | Last window |
-| `C-a S` | New session |
-| `C-a X` | Kill session |
-| `C-a R` | Rename session |
-| `C-a r` | Reload config |
-| `C-a M-i` | IDE layout (main-vertical) |
-| `C-a M-w` | Wide layout (main-horizontal) |
-| `C-a M-g` | Grid layout (tiled) |
-
-<img src="assets/divider.svg" alt="" width="900"/>
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/neovim.svg"/>
-    <source media="(prefers-color-scheme: light)" srcset="assets/neovim-light.svg"/>
-    <img src="assets/neovim.svg" alt="Neovim section header — LSP, DAP, Treesitter, lazy.nvim stack" width="900"/>
-  </picture>
-</p>
-
-## Neovim
-
-**LSP servers** (auto-installed via Mason):
-pyright, ruff, clangd, rust_analyzer, gopls, zls, ts_ls, bashls, lua_ls, html, cssls, jsonls, yamlls, dockerls, terraformls, tailwindcss
-
-**DAP debuggers**: Python (debugpy), C/C++/Rust (GDB)
-
-**Key plugins**: Telescope, Neo-tree, Gitsigns, Trouble, Bufferline, Lualine, Noice, nvim-cmp, LuaSnip, Conform (format-on-save), hex.nvim, rest.nvim, toggleterm, diffview, opencode.nvim
-
-| Key | Action |
-|---|---|
-| `<leader>ff` | Find files |
-| `<leader>fg` | Live grep |
-| `<leader>fb` | Buffers |
-| `<leader>fr` | Recent files |
-| `<leader>fw` | Grep word under cursor |
-| `<leader>t` | File tree |
-| `<leader>xx` | Diagnostics (Trouble) |
-| `<leader>cf` | Format buffer |
-| `<leader>ca` | Code action |
-| `<leader>rn` | Rename symbol |
-| `gd` / `gr` | Go to definition / references |
-| `K` | Hover docs |
-| `<leader>db` | Toggle breakpoint |
-| `<leader>dc` | Debug continue |
-| `<leader>do` / `<leader>di` | Step over / step into |
-| `<leader>du` | DAP UI toggle |
-| `<leader>gg` | Git status (fugitive) |
-| `<leader>gv` | Diffview |
-| `<leader>gh` | File history |
-| `]h` / `[h` | Next / prev git hunk |
-| `<leader>hs` / `<leader>hp` | Stage / preview hunk |
-| `<leader>xH` | Hex editor (hex.nvim) |
-| `<leader>xh` / `<leader>xr` | xxd hex view / revert |
-| `<leader>mp` | Markdown preview |
-| `<leader>rr` / `<leader>rl` | Run HTTP request / Re-run last (rest.nvim) |
-| `<C-\>` / `<leader>tf` | Float terminal |
-| `<leader>th` / `<leader>tv` | Terminal horizontal / vertical |
-| `<leader>oa` / `<leader>ot` | Ask opencode about selection / toggle panel |
-| `<leader>os` | Select opencode action |
-
-<img src="assets/divider.svg" alt="" width="900"/>
-
-## LM Studio
-
-Local LLM inference via [LM Studio](https://lmstudio.ai). The installer pulls `lmstudio-bin` from Chaotic AUR.
-
-OpenCode is pre-configured as a provider (`http://127.0.0.1:1234/v1`) with starter models in `.config/opencode/opencode.json`. Load a model in LM Studio, start the server, then use `/models` in OpenCode.
-
-```bash
-lms --help             # real LM Studio CLI (on $PATH via ~/.lmstudio/bin)
-lms ls                 # list installed models
-lms load <model>       # load a model
-
-lmsgui                 # open the LM Studio GUI
-lms-server             # start headless API server on :1234 (wrapper)
-lms-stop               # stop the server
-lms-status             # curl /v1/models and list loaded IDs
-lms-chat               # quick /v1/chat/completions smoke test
-```
-
-<img src="assets/divider.svg" alt="" width="900"/>
-
-## HexStrike AI MCP
-
-[HexStrike AI](https://github.com/0x4m4/hexstrike-ai) exposes 150+ offensive security tools to AI agents via MCP.
-
-The installer clones the repo to `~/tools/hexstrike-ai`, sets up a Python venv, and enables a systemd user service (`hexstrike-server.service`) running the Flask backend on `127.0.0.1:8888`. OpenCode connects through the `hexstrike-mcp` stdio bridge.
-
-```bash
-sysu status hexstrike-server   # check service status
-sysu restart hexstrike-server  # restart the backend
-```
-
-<img src="assets/divider.svg" alt="" width="900"/>
-
-## OpenCode Agents
-
-OpenCode is configured in `.config/opencode/opencode.json` with local providers (LM Studio + Ollama) and 10 MCP servers (HexStrike AI, Context7, GitHub, filesystem, fetch, Playwright, sequential-thinking, memory, git, plus a weather demo). Agents live in `.config/opencode/agent/`.
-
-| Agent | Purpose |
-|---|---|
-| `hexstrike-analyst-context7` | Authorized pentest / CTF recon via HexStrike + Context7 docs |
-| `superclaude-architect-context7` | Large-codebase architect with Context7 lookups |
-| `build` | Build systems, CI/CD, infrastructure code |
-| `analyze` | Security-focused code review |
-| `docs` | Documentation-writing agent (from heimdall_opencode) |
-| `git-committer` | Conventional commits + push helper (from heimdall_opencode) |
-
-The [`SuperClaude-Org/heimdall_opencode`](https://github.com/SuperClaude-Org/heimdall_opencode) fork ships curated agents and MCP wiring. It's vendored as a pinned git submodule at `.config/opencode/heimdall_opencode/` so the agent pack travels with the repo. `bootstrap.sh` clones with `--recurse-submodules --shallow-submodules`; `install.sh` re-inits the submodule as a safety net for existing clones.
-
-```bash
-# Refresh to the latest upstream heimdall commit on its dev branch
-git submodule update --remote --merge .config/opencode/heimdall_opencode
-```
-
-<img src="assets/divider.svg" alt="" width="900"/>
-
-## Telia
+## Telia — TUI coding agent
 
 [Telia (τέλεια)](https://github.com/foolish-dev/telia) is a single-binary TUI coding agent — talks to local Ollama or any of ~20 cloud chat-completions endpoints (~210 named models), runs 25 built-in tools (read/write/edit, bash, list/glob/grep, head/tail/tree/stat/diff, apply_patch, lint/format/typecheck), hosts MCP servers, and persists sessions to SQLite.
-
-The installer runs `cargo install --git https://github.com/foolish-dev/telia --branch dev --locked telia-cli`, dropping the binary at `~/.cargo/bin/telia` (already on `$PATH` via `.zshrc`). Lives alongside OpenCode rather than replacing it — OpenCode for editor-integrated work, Telia for plain-TUI sessions.
 
 ```bash
 telia                            # local Ollama (default: hf.co/FoolDev/Thanatos-27B)
@@ -353,92 +155,167 @@ telia --plan                     # read-only tools, no mutations
 telia --auto                     # no confirmation prompts
 ```
 
-`Super+T` launches Telia in a floating kitty (`--class telia-float`) —
-the matching `window-rule` in `~/.config/niri/config.kdl` lifts it out
-of the tiled column at 900×700, and grogu's `grogu.kdl` paints its
-focus-ring purple so it's visually distinct from regular terminals.
+`Super+T` launches Telia in a floating kitty (`--class telia-float`). The matching `window-rule` in `niri/config.kdl` lifts it out of the tiled column at 900×700; grogu's `grogu.kdl` paints its focus-ring purple so it's visually distinct from regular terminals.
+
+Lives alongside OpenCode rather than replacing it — OpenCode for editor-integrated work (nvim `<leader>oa`/`<leader>ot`), Telia for plain-TUI sessions away from the editor.
 
 <img src="assets/divider.svg" alt="" width="900"/>
 
-## grogu — wallpaper-driven theme propagation
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/keybinds.svg"/>
+    <source media="(prefers-color-scheme: light)" srcset="assets/keybinds-light.svg"/>
+    <img src="assets/keybinds.svg" alt="Keybinds — niri, tmux, neovim" width="900"/>
+  </picture>
+</p>
 
-[grogu](https://github.com/foolish-dev/grogu) is a standalone Rust binary
-that extracts a palette from the current wallpaper (k-means clustering in
-CIE Lab, accents pulled toward canonical hues) and writes it into every
-theming target on the desktop in one shot. Press `Super+W` to open
-Noctalia's wallpaper picker — selecting a wallpaper fires the
-`hooks.wallpaperChange` script in
-`~/.config/noctalia/settings.json`:
+## Keybinds
 
-```bash
-$HOME/.cargo/bin/grogu apply --extract="$1" --reload
-```
+### Niri (compositor — Super is `Mod`)
 
-What lands where:
+| Key | Action | | Key | Action |
+|---|---|---|---|---|
+| `Super+Space` / `D` | Noctalia launcher | | `Super+H/J/K/L` | Focus window |
+| `Super+S` | Noctalia control center | | `Super+Shift+H/J/K/L` | Move window |
+| `Super+Comma` | Noctalia settings | | `Super+1-9` | Workspace |
+| `Super+Return` | Kitty | | `Super+Tab` | Previous workspace |
+| `Super+Shift+Return` | Floating kitty | | `Super+F` | Maximize column |
+| `Super+N` | Neovim | | `Super+Shift+F` | Fullscreen |
+| `Super+T` | **Telia** (floating) | | `Super+R` | Cycle column width |
+| `Super+B` | Firefox | | `Super+Minus/Equal` | Shrink / grow column |
+| `Super+E` | Thunar | | `Super+[` / `Super+]` | Consume / expel from column |
+| `Super+W` | **Wallpaper picker** (→ grogu) | | `Super+Q` | Close window |
+| `Super+V` | Clipboard history (cliphist + fuzzel) | | `Super+Escape` | Lock screen |
+| `Super+O` | Toggle on-screen keyboard | | `Super+Shift+E` | Quit niri |
+| `Super+Shift+P` | Power off monitors | | `Super+Shift+C` | Reload niri config |
+| `Print` / `Super+Print` / `Super+Shift+Print` | Region / screen / window screenshot | | `Super+Shift+/` | Show hotkey overlay |
 
-| Target | What grogu writes | How it picks up the change |
-|---|---|---|
-| **Noctalia** | `~/.config/noctalia/colors.json` (flat m-color map) + `colorschemes/Grogu/Grogu.json` (full scheme + ANSI), sets `colorSchemes.predefinedScheme = "Grogu"` | `Color.qml` file-watches `colors.json` with `watchChanges: true` — live-reloads every binding |
-| **niri** | `~/.config/niri/grogu.kdl` (focus-ring colours) | niri live-reloads on save |
-| **kitty** | `~/.config/kitty/grogu.conf` | `--reload` sends `SIGUSR1` to every running kitty |
-| **ghostty** | `~/.config/ghostty/themes/grogu` | ghostty live-reloads on save |
-| **tmux** | `~/.config/tmux/grogu.conf` | `--reload` runs `tmux -S <socket> source-file` on every live socket |
-| **nvim** | `~/.config/nvim/colors/grogu.vim` | Activate with `:colorscheme grogu` |
-| **telia** | `prefs.theme` row in telia's sqlite | picked up on next launch |
+Security quick-launch (all `Super+Ctrl+…`): `M` msfconsole · `W` wireshark · `B` burpsuite · `N` nmap term · `T` btop · `A` LM Studio.
 
-Three predefined themes also ship — `tokyo-night`, `catppuccin`,
-`dracula` — usable without an extract:
+### Tmux (prefix = `Ctrl-a`)
 
-```bash
-grogu apply --theme catppuccin       # lock to a built-in
-grogu apply --theme tokyo-night      # default fallback
-grogu paths                          # everywhere grogu reads / writes
-grogu extract /path/to/img.jpg       # preview palette without writing
-```
-
-Bootstrap and wiring:
-
-- `install.sh` installs grogu via `cargo install --git https://github.com/foolish-dev/grogu --branch main --locked` → `~/.cargo/bin/grogu`.
-- `deploy.sh` symlinks the niri / kitty / tmux / nvim / ghostty config trees that include grogu's output files.
-- `~/.config/noctalia/settings.json` has `hooks.enabled = true` and `hooks.wallpaperChange` set to the grogu command above.
-- `~/.config/niri/config.kdl` does `include "grogu.kdl"` and binds `Super+W` to `qs -c noctalia-shell ipc call wallpaper toggle`.
-- `.gitignore` excludes all of grogu's output files (`grogu.conf` / `grogu.kdl` / `grogu.vim` / `colors.json` / `colorschemes/`) — they're generated, not source.
-
-Tokyo Night is the static fallback before the first `grogu apply` run.
+| Key | Action | | Key | Action |
+|---|---|---|---|---|
+| `\|` `-` | Split horiz / vert | | `g` | Lazygit popup |
+| `h j k l` | Navigate panes | | `b` | btop popup |
+| `H J K L` | Resize pane | | `f` | fzf file opener |
+| `>` `<` | Swap pane down / up | | `c` | New window |
+| `S` `X` `R` | New / kill / rename session | | `C-h` / `C-l` / `Tab` | Prev / next / last window |
+| `r` | Reload config | | `M-i` / `M-w` / `M-g` | IDE / wide / grid layout |
 
 <img src="assets/divider.svg" alt="" width="900"/>
 
-## SDDM Themes
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/neovim.svg"/>
+    <source media="(prefers-color-scheme: light)" srcset="assets/neovim-light.svg"/>
+    <img src="assets/neovim.svg" alt="Neovim — LSP, DAP, Treesitter, lazy.nvim" width="900"/>
+  </picture>
+</p>
 
-The default is [noctalia](https://github.com/noctalia-dev/noctalia-shell)'s SDDM theme, which auto-syncs the lock screen to the desktop wallpaper via a path-watch unit. Several alternates are installed, including two custom Tokyo Night configs for the [astronaut](https://github.com/Keyitdev/sddm-astronaut-theme) theme (Qt6):
+## Neovim
 
-| Theme | Style |
+**LSP** (auto-installed via Mason): pyright, ruff, clangd, rust_analyzer, gopls, zls, ts_ls, bashls, lua_ls, html, cssls, jsonls, yamlls, dockerls, terraformls, tailwindcss.
+**DAP**: Python (debugpy), C/C++/Rust (GDB).
+**Plugins**: Telescope, Neo-tree, Gitsigns, Trouble, Bufferline, Lualine, Noice, nvim-cmp, LuaSnip, Conform (format-on-save), hex.nvim, rest.nvim, toggleterm, diffview, opencode.nvim.
+
+| `<leader>…` | | `<leader>…` | | `<leader>…` | |
+|---|---|---|---|---|---|
+| `ff` Find files | `cf` Format buffer | `db` Toggle breakpoint | `gg` Git status | `xH` Hex editor | `oa` Ask OpenCode |
+| `fg` Live grep | `ca` Code action | `dc` Debug continue | `gv` Diffview | `xh` / `xr` xxd view / revert | `ot` Toggle OpenCode |
+| `fb` Buffers | `rn` Rename symbol | `do` / `di` Step over / into | `gh` File history | `mp` Markdown preview | `os` OpenCode action |
+| `fr` Recent | `t` File tree | `du` DAP UI | `]h` / `[h` Next / prev hunk | `rr` / `rl` Run / re-run HTTP | `<C-\>` Float terminal |
+| `fw` Grep word | `xx` Trouble | | `hs` / `hp` Stage / preview hunk | | |
+
+Native: `gd` / `gr` definition / references · `K` hover docs.
+
+<img src="assets/divider.svg" alt="" width="900"/>
+
+## AI stack
+
+Three components, all running locally by default and all reachable from the editor:
+
+- **[LM Studio](https://lmstudio.ai)** — local inference server on `127.0.0.1:1234`. Installed from Chaotic AUR (`lmstudio-bin`). CLI: `lms ls / load / status / chat`. Wrapper helpers: `lmsgui`, `lms-server`, `lms-stop`, `lms-status`, `lms-chat`.
+- **[OpenCode](https://opencode.ai)** — editor-integrated coding agent. `.config/opencode/opencode.json` wires LM Studio + Ollama as providers and adds 10 MCP servers (HexStrike, Context7, GitHub, filesystem, fetch, Playwright, sequential-thinking, memory, git, weather). Agents in `.config/opencode/agent/`.
+- **[HexStrike AI](https://github.com/0x4m4/hexstrike-ai) MCP** — 150+ offensive-security tools exposed via MCP. Installer clones to `~/tools/hexstrike-ai`, creates a Python venv, runs the Flask backend on `127.0.0.1:8888` as a systemd user service (`hexstrike-server.service`). OpenCode connects through the `hexstrike-mcp` stdio bridge.
+
+| OpenCode agent | Purpose |
 |---|---|
-| `noctalia` | Built for Noctalia Shell, follows shell wallpaper via `sync-shell-wallpaper.sh` **(default)** |
-| `cyberpunk` | Built-in astronaut variant |
+| `hexstrike-analyst-context7` | Authorized pentest / CTF recon (HexStrike + Context7) |
+| `superclaude-architect-context7` | Large-codebase architect with Context7 lookups |
+| `build` / `analyze` / `docs` / `git-committer` | Bundled from [heimdall_opencode](https://github.com/SuperClaude-Org/heimdall_opencode) (pinned submodule) |
+
+```bash
+sysu status hexstrike-server   # check the MCP backend
+sysu restart hexstrike-server  # restart it
+git submodule update --remote --merge .config/opencode/heimdall_opencode  # refresh the agent pack
+```
+
+<img src="assets/divider.svg" alt="" width="900"/>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/launcher.svg"/>
+    <source media="(prefers-color-scheme: light)" srcset="assets/launcher-light.svg"/>
+    <img src="assets/launcher.svg" alt="Noctalia launcher — 157 pinned apps across 21 categories" width="900"/>
+  </picture>
+</p>
+
+## Noctalia dock & launcher
+
+`Super` (tap) or `Super+D` opens the launcher; `Super+S` opens control center; `Super+Comma` opens settings. The dock and launcher are pre-configured with security tools.
+
+**Dock** (bottom bar): Kitty, Firefox, Thunar, Neovim, LM Studio, Wireshark, Burp Suite, Metasploit, Nmap, Iaito, Autopsy, btop.
+
+**Launcher**: 157 pinned apps across 21 workflow-ordered categories — Core · Web Testing · Recon/OSINT · DNS/Subdomain · Web Exploitation · Scanning · Exploitation · AD/Windows · Passwords · Wireless · Privesc/Post · Reversing · Mobile · Forensics · Networking/MITM · Social Engineering · Crypto · Steganography · Fuzzing · Secret Scanning · Cloud. 147 custom `.desktop` entries in `.local/share/applications/` give terminal BlackArch tools a kitty-launching wrapper with a usage hint.
+
+<img src="assets/divider.svg" alt="" width="900"/>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/blackarch.svg"/>
+    <source media="(prefers-color-scheme: light)" srcset="assets/blackarch-light.svg"/>
+    <img src="assets/blackarch.svg" alt="BlackArch — 300+ tools across 19 categories" width="900"/>
+  </picture>
+</p>
+
+## BlackArch tools
+
+`install.sh` adds the BlackArch repo (key + mirrorlist + pacman.conf) and pulls 300+ tools across 19 categories:
+
+`recon` · `dns/subdomain` · `web` · `exploitation` · `active directory` · `passwords` · `wireless` · `privesc/post` · `reversing` · `mobile` · `forensics` · `networking/MITM` · `social-eng` · `crypto` · `stego` · `fuzzing` · `secret scanning` · `cloud` · `wordlists`.
+
+Full per-tool breakdown in [`install.sh`](install.sh) under `PKG_BLACKARCH=(...)`. [Chaotic AUR](https://aur.chaotic.cx) is also added so packages like `lmstudio-bin` / `opencode-bin` install instantly.
+
+<img src="assets/divider.svg" alt="" width="900"/>
+
+## SDDM themes
+
+Default is [noctalia](https://github.com/noctalia-dev/noctalia-shell)'s SDDM theme — auto-syncs the lock screen to the desktop wallpaper via a path-watch unit. 8 alternates ship, including two custom Tokyo Night variants of the [astronaut](https://github.com/Keyitdev/sddm-astronaut-theme) theme (Qt6):
+
+| Theme | Notes |
+|---|---|
+| `noctalia` | **Default**. Follows shell wallpaper via `sync-shell-wallpaper.sh` |
 | `tokyo-night` | Tokyo Night palette, blurred form, JetBrainsMono, samurai background |
 | `tokyo-night-cyberpunk` | Neon red/cyan accents, sharp edges, matrix background |
-| `astronaut` | Default astronaut (space theme) |
-| `japanese_aesthetic` | Built-in astronaut variant |
+| `cyberpunk` / `astronaut` / `japanese_aesthetic` | Built-in astronaut variants |
 | `tokyo-night-sddm` | Original Tokyo Night SDDM (Qt5) |
-| `sddm-sugar-dark` | Clean minimal dark |
-| `sddm-lain-wired` | Serial Experiments Lain / cyberpunk |
+| `sddm-sugar-dark` / `sddm-lain-wired` | Clean minimal dark / Lain cyberpunk |
 
 ```bash
-sddm-theme                     # fzf picker for all installed themes
+sddm-theme                     # fzf picker
 sddm-theme tokyo-night         # switch directly
-sddm-theme cyberpunk            # any astronaut variant or standalone theme
 ```
 
-The switcher handles config deployment, wallpaper copying, and SDDM metadata patching. Customizations are applied to an upgrade-proof local copy at `/usr/share/sddm/themes/sddm-astronaut-local/`, created by `deploy.sh` — so `pacman -Syu` on `sddm-astronaut-theme` can't clobber your variant selection or backgrounds. To refresh against upstream changes, `sudo rm -rf /usr/share/sddm/themes/sddm-astronaut-local && ./deploy.sh`.
+Customizations apply to `/usr/share/sddm/themes/sddm-astronaut-local/`, an upgrade-proof copy created by `deploy.sh` — `pacman -Syu` can't clobber your variant. To refresh against upstream: `sudo rm -rf /usr/share/sddm/themes/sddm-astronaut-local && ./deploy.sh`.
 
 <img src="assets/divider.svg" alt="" width="900"/>
 
 ## Wallpapers
 
-23 curated Tokyo Night wallpapers are bundled in `wallpapers/` and symlinked to `~/Pictures/Wallpapers/` by `deploy.sh`:
+23 curated 4K wallpapers in `wallpapers/`, symlinked into `~/Pictures/Wallpapers/` by `deploy.sh`:
 
-| Category | Wallpapers |
+| Category | Names |
 |---|---|
 | Arch / Distro | `arch-night`, `arch-night-alt`, `arch-czechbol`, `kali` |
 | Dev / Minimal | `neovim`, `rust`, `python`, `c-lang`, `vim`, `stripes` |
@@ -448,101 +325,11 @@ The switcher handles config deployment, wallpaper copying, and SDDM metadata pat
 | Abstract | `abstract-lock`, `fly` |
 
 ```bash
-# Pick interactively — Super+W opens Noctalia's wallpaper panel; selection
-# fires the wallpaperChange hook → grogu repaints every target.
-qs -c noctalia-shell ipc call wallpaper toggle
-
-# Or set a specific image directly:
-qs -c noctalia-shell ipc call wallpaper set ~/Pictures/Wallpapers/samurai.png
+qs -c noctalia-shell ipc call wallpaper toggle                            # Super+W: interactive picker
+qs -c noctalia-shell ipc call wallpaper set ~/Pictures/Wallpapers/samurai.png  # direct
 ```
 
-Sourced from [tokyo-night/wallpapers](https://github.com/tokyo-night/wallpapers) (MIT), [czechbol/tokyonight-backgrounds](https://github.com/czechbol/tokyonight-backgrounds) (CC), and [atraxsrc/tokyonight-wallpapers](https://github.com/atraxsrc/tokyonight-wallpapers) (GPL-2.0).
-
-<img src="assets/divider.svg" alt="" width="900"/>
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/launcher.svg"/>
-    <source media="(prefers-color-scheme: light)" srcset="assets/launcher-light.svg"/>
-    <img src="assets/launcher.svg" alt="Noctalia launcher section header — 157 pinned apps across 21 categories" width="900"/>
-  </picture>
-</p>
-
-## Noctalia Dock & Launcher
-
-The Noctalia dock and app launcher are pre-configured with pinned security tools. Press `Super` (tap) or `Super+D` to open the launcher.
-
-**Dock** (bottom bar): Kitty, Firefox, Thunar, Neovim, LM Studio, Wireshark, Burp Suite, Metasploit, Nmap, Iaito, Autopsy, btop
-
-**Launcher** (157 pinned apps across 21 categories, ordered by workflow):
-
-| Group | Apps |
-|---|---|
-| Core | Kitty, Firefox, Neovim, LM Studio |
-| Web Testing | Wireshark, Burp Suite, ZAP, Mitmproxy |
-| Recon / OSINT | theHarvester, Sherlock, Recon-ng, SpiderFoot, Katana, GAU, Waybackurls, Hakrawler, GoSpider, DMitry, Legion, Maltego |
-| DNS / Subdomain | DNSenum, MassDNS, ShuffleDNS, PureDNS, DNSx, AlterX, Naabu, ASNmap, MapCIDR, CDNcheck, Fierce, DNSmap |
-| Web Exploitation | Nikto, WPScan, Commix, Dalfox, Arjun, JWT Tool, NoSQLMap, GraphQLmap, Skipfish, Cadaver, Dirsearch, Wfuzz, Ffuf, FeroxBuster, Dirb, Gobuster |
-| Scanning | Nmap, SQLMap |
-| Exploitation | Metasploit, Empire, BeEF, Sliver, RouterSploit, SearchSploit, Veil, MSFvenom |
-| AD / Windows | NetExec, Kerbrute, BloodHound, Evil-WinRM, Certipy, Enum4linux-ng, BloodyAD, Ldeep, Windapsearch, Coercer, Manspider, SCCMHunter, Nishang |
-| Passwords | Hydra, Hashcat, John, CeWL, Crunch, Medusa, Patator, CUPP, Changeme, Name-That-Hash |
-| Wireless | Responder, Bettercap, Wifite, Reaver, Fluxion, Airgeddon, Yersinia, Aircrack-ng |
-| Privesc / Post | LinPEAS, WinPEAS, Pspy, Mimikatz, Chisel, Ligolo-ng, Pwncat, Rubeus, SharpHound |
-| Reversing | Iaito, Ghidra, Cutter, Rizin, Radare2, Angr, Ropper, RetDec |
-| Mobile | MobSF, JADX, APKTool, Objection, Drozer, APKLeaks |
-| Forensics | Autopsy, Volatility3, YARA, Binwalk, Foremost, Bulk Extractor, OLEtools, RegRipper, PDF Parser |
-| Networking / MITM | Ettercap, dSniff, SSLstrip, Hping3, SNMPcheck, Tcpdump, dns2tcp, Iodine, Ptunnel, Proxify |
-| Social Engineering | SET, GoPhish, Evilginx, King Phisher |
-| Crypto | HashPump, RsaCtfTool, Xortool, FeatherDuster |
-| Steganography | StegSeek, Steghide, Zsteg, StegSolve, OpenStego, Snow |
-| Fuzzing | AFL++, Boofuzz, Radamsa, zzuf |
-| Secret Scanning | TruffleHog, Gitleaks, Interactsh |
-| Cloud Security | Pacu, ScoutSuite, Prowler |
-
-147 custom `.desktop` entries in `.local/share/applications/` provide launcher integration for terminal-based BlackArch tools. Each opens in Kitty with a usage hint.
-
-<img src="assets/divider.svg" alt="" width="900"/>
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/blackarch.svg"/>
-    <source media="(prefers-color-scheme: light)" srcset="assets/blackarch-light.svg"/>
-    <img src="assets/blackarch.svg" alt="BlackArch section header — 300+ offensive security tools across 19 categories" width="900"/>
-  </picture>
-</p>
-
-## BlackArch Tools
-
-The installer adds the BlackArch repository and pulls 300+ tools across 19 categories:
-
-| Category | Tools |
-|---|---|
-| Recon / OSINT | theharvester, sherlock, recon-ng, spiderfoot, katana, gau, waybackurls, hakrawler, gospider, dmitry, legion, maltego |
-| DNS / Subdomain | dnsenum, massdns, shuffledns, puredns, dnsx, alterx, naabu, asnmap, mapcidr, cdncheck, fierce, dnsmap |
-| Web | wpscan, commix, dalfox, arjun, jwt-tool, nosqlmap, graphqlmap, zaproxy, skipfish, cadaver, dirsearch, wfuzz |
-| Exploitation | evil-winrm, sliver, empire, netexec, beef-xss, routersploit, searchsploit, veil, unicorn-powershell |
-| Active Directory | kerbrute, certipy, enum4linux-ng, bloodyad, ldeep, windapsearch, coercer, manspider, sccmhunter, nishang |
-| Passwords | hashcat-utils, hcxtools, cewl, crunch, medusa, patator, cupp, changeme, rsmangler, name-that-hash |
-| Wireless | bettercap, wifite, reaver, fluxion, airgeddon, yersinia |
-| Privesc / Post | linpeas, winpeas, pspy, mimikatz, bloodhound, chisel, ligolo-ng, pwncat, rubeus, sharphound |
-| Reversing | rizin, cutter, angr, ropper, one_gadget, retdec, ghidra, radare2 |
-| Mobile | apktool, jadx, dex2jar, objection, drozer, apkleaks, mobsf |
-| Forensics | autopsy, yara, volatility3, bulk-extractor, oletools, regripper, pdf-parser |
-| Networking / MITM | mitmproxy, ettercap, dsniff, sslstrip, dns2tcp, iodine, ptunnel, hping3, snmpcheck |
-| Social Eng | SET, gophish, evilginx, king-phisher |
-| Crypto | hashpump, rsactftool, xortool, featherduster |
-| Stego | stegseek, zsteg, stegsolve, openstego, snow |
-| Fuzzing | afl++, boofuzz, radamsa, zzuf |
-| Secret Scanning | trufflehog, gitleaks, interactsh, proxify |
-| Cloud | pacu, scoutsuite, prowler |
-| Wordlists | seclists, payloadsallthethings, fuzzdb, rockyou, dirbuster-wordlists |
-
-<img src="assets/divider.svg" alt="" width="900"/>
-
-## Chaotic AUR
-
-[Chaotic AUR](https://aur.chaotic.cx) provides pre-built AUR packages so you skip compilation. The installer adds the repo automatically (GPG key + mirrorlist + pacman.conf entry). Packages like `lmstudio-bin`, `opencode-bin`, and many others install instantly via pacman.
+Sources: [tokyo-night/wallpapers](https://github.com/tokyo-night/wallpapers) (MIT), [czechbol/tokyonight-backgrounds](https://github.com/czechbol/tokyonight-backgrounds) (CC), [atraxsrc/tokyonight-wallpapers](https://github.com/atraxsrc/tokyonight-wallpapers) (GPL-2.0).
 
 <img src="assets/divider.svg" alt="" width="900"/>
 
@@ -550,75 +337,87 @@ The installer adds the BlackArch repository and pulls 300+ tools across 19 categ
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/terminal.svg"/>
     <source media="(prefers-color-scheme: light)" srcset="assets/terminal-light.svg"/>
-    <img src="assets/terminal.svg" alt="Terminal section header — Kitty, tmux, zsh, zinit, starship stack" width="900"/>
+    <img src="assets/terminal.svg" alt="Terminal — kitty, tmux, zsh, zinit, starship" width="900"/>
   </picture>
 </p>
 
-## Zsh Security Toolkit
+## Zsh helpers
 
 ```bash
-# Quick reference
-cheat blackarch                    # BlackArch tools overview
-cheat privesc                      # Privilege escalation
-cheat ad                           # Active Directory attacks
-cheat revshells                    # Reverse shell one-liners
-cheat nmap                         # Nmap scanning
-cheat ffuf                         # Web fuzzing
-cheat git                          # Git workflows
-cheat docker                       # Docker commands
-cheat tmux                         # tmux keybinds
-cheat nvim                         # Neovim keybinds
+# Cheat sheets (40+ topics)
+cheat blackarch | privesc | ad | revshells | nmap | ffuf | git | docker | tmux | nvim
 
-# Functions
-revshell 10.10.14.1 4444           # Generate bash/python/nc/ps reverse shells
-listen 4444                        # nc listener
-serve 8000                         # Python HTTP server
-recon example.com                  # Whois + DNS summary
-quickscan 10.10.10.0/24            # Ping sweep
-hashid <hash>                      # Identify hash type
+# Pentest helpers
+revshell 10.10.14.1 4444       # bash / python / nc / ps reverse shells
+listen 4444                    # nc listener
+serve 8000                     # python HTTP server
+recon example.com              # whois + DNS summary
+quickscan 10.10.10.0/24        # ping sweep
+hashid <hash>                  # identify hash type
 
-# Dev scripts
-proj                               # Fuzzy open a project in tmux
-mkproj myapp python                # Scaffold a Python project
-dev                                # Launch 3-pane tmux IDE
-gclone user/repo                   # Clone from GitHub + cd
-gclone gh:user/repo                # GitHub shorthand
-gclone gl:user/repo                # GitLab shorthand
+# Project / dev scripts
+proj                           # fuzzy project opener (fzf + tmux)
+mkproj myapp python            # scaffold python/rust/go/c/node/shell
+dev                            # 3-pane tmux IDE
+gclone gh:user/repo            # smart clone (gh: / gl: shorthand)
 
-# grogu / theming
-qs -c noctalia-shell ipc call wallpaper toggle   # Open Noctalia's wallpaper picker (Super+W)
-grogu apply --theme catppuccin                   # Lock to a predefined theme (no extract)
-sddm-theme                                       # fzf picker for all installed themes
-sddm-theme tokyo-night                           # switch SDDM theme directly
-
-# Terminal utilities
-colorbars                          # Show full 256-color palette
-colorblocks                        # Show basic 16-color palette
-pipes                              # Animated pipes screensaver
+# Theming
+qs -c noctalia-shell ipc call wallpaper toggle   # Super+W picker
+grogu apply --theme catppuccin                   # lock predefined
+sddm-theme                                       # fzf SDDM picker
 
 # LM Studio
-lms                                # Open LM Studio
-lms-server                         # Start local API server
-lms-status                         # Show loaded models
-
-# Aliases (samples)
-nmap-stealth 10.10.10.1            # SYN scan, fragmented
-msf                                # msfconsole -q
-wpscan-enum http://target          # WordPress full enum
-evilwinrm -i IP -u user -p pass   # WinRM shell
-lg                                 # lazygit
+lms-server | lms-status | lms-chat               # headless API on :1234
 ```
 
+`.local/bin/` ships `proj`, `mkproj`, `dev`, `gclone`, `cheat`, `hexstrike-mcp`, `sddm-theme`, `colorbars`, `colorblocks`, `pipes`, `dotfiles-check`. Aliases worth knowing: `lg` (lazygit), `msf` (msfconsole -q), `nmap-stealth`, `wpscan-enum`, `evilwinrm`.
+
+<img src="assets/divider.svg" alt="" width="900"/>
+
+## Layout
+
+```text
+.config/
+  niri/config.kdl              compositor: keybinds, layout, window rules
+  noctalia/
+    settings.json              bar / dock / panels / launcher (grogu writes colors.json + colorschemes/Grogu/, gitignored)
+  nvim/                        lazy.nvim, lua/config/, lua/plugins/ (colorscheme / lsp / dap / editor / ui / coding)
+  kitty/kitty.conf             0.90 opacity, grogu + Tokyo Night fallback
+  tmux/tmux.conf               vim nav, popups, grogu + Tokyo Night fallback
+  ghostty/                     ghostty terminal (grogu theme drops in themes/grogu)
+  lazygit/config.yml           delta pager, Tokyo Night
+  fuzzel/fuzzel.ini            app launcher
+  starship.toml                prompt
+  opencode/                    AI agent config + heimdall_opencode submodule
+  systemd/user/                cliphist, awww, hexstrike-server, llama-crow9b, fwupd-check
+.zshrc                         80+ aliases, BlackArch shortcuts, sources ~/.zshrc.local last
+.gitconfig                     delta diffs, 30+ aliases, nvim mergetool, [include]s ~/.gitconfig.local
+.local/bin/                    proj, mkproj, dev, gclone, cheat, hexstrike-mcp, sddm-theme, colorbars, dotfiles-check, …
+.local/share/applications/     147 BlackArch .desktop entries (15 categories) for launcher integration
+wallpapers/                    23 curated 4K wallpapers, symlinked into ~/Pictures/Wallpapers/
+assets/                        README SVGs (header, dividers, palette, architecture, section banners)
+etc/sddm.conf.d/niri.conf     deployed to /etc by deploy.sh
+etc/sddm-themes/               custom Tokyo Night astronaut variants
+installer/                     Rust port of install.sh + deploy.sh (niri-install / niri-deploy bins)
+bootstrap.sh                   curl | bash one-liner
+install.sh                     Arch + BlackArch + Chaotic AUR package bootstrap
+deploy.sh                      symlink deployer with auto-backup
+```
+
+<img src="assets/divider.svg" alt="" width="900"/>
+
 ## Color Palette
+
+Tokyo Night is the static fallback — every config falls back to it when grogu hasn't written a `grogu.*` override yet.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/palette.svg"/>
   <source media="(prefers-color-scheme: light)" srcset="assets/palette-light.svg"/>
-  <img src="assets/palette.svg" alt="Tokyo Night palette — bg, comment, blue, cyan, purple, green, yellow, red swatches with hex codes" width="900"/>
+  <img src="assets/palette.svg" alt="Tokyo Night palette — bg, comment, blue, cyan, purple, green, yellow, red swatches" width="900"/>
 </picture>
 
 <img src="assets/divider.svg" alt="" width="900"/>
 
 <p align="center">
-  <sub>MIT License &copy; <a href="https://github.com/foolish-dev">foolish-dev</a></sub>
+  <sub>MIT License &copy; <a href="https://github.com/foolish-dev">foolish-dev</a> · <a href="https://buymeacoffee.com/cardoffoolm">Buy me a coffee</a></sub>
 </p>

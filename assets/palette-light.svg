@@ -13,7 +13,7 @@
   <rect width="900" height="160" rx="12" fill="url(#pbg)"/>
 
   <!-- Title -->
-  <text x="450" y="30" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" fill="#6172b0" letter-spacing="6">TOKYO NIGHT PALETTE</text>
+  <text x="450" y="30" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" fill="#6172b0" letter-spacing="6">TOKYO NIGHT  ·  STATIC FALLBACK</text>
 
   <!-- Color swatches: these are the Tokyo Night dark palette swatches, intentionally unchanged -->
   <g filter="url(#shadow)">
