@@ -179,6 +179,7 @@ deploy.sh                      symlink deployer with auto-backup
 | `Super+Shift+Return` | Floating terminal |
 | `Super+B` | Firefox |
 | `Super+N` | Neovim |
+| `Super+T` | Telia (floating TUI coding agent) |
 | `Super+E` | File manager (Thunar) |
 | `Super+H/J/K/L` | Focus window |
 | `Super+Shift+H/J/K/L` | Move window |
@@ -351,6 +352,11 @@ telia --resume                   # pick up the last session (alias: -r, --contin
 telia --plan                     # read-only tools, no mutations
 telia --auto                     # no confirmation prompts
 ```
+
+`Super+T` launches Telia in a floating kitty (`--class telia-float`) —
+the matching `window-rule` in `~/.config/niri/config.kdl` lifts it out
+of the tiled column at 900×700, and grogu's `grogu.kdl` paints its
+focus-ring purple so it's visually distinct from regular terminals.
 
 <img src="assets/divider.svg" alt="" width="900"/>
 
