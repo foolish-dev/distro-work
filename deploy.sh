@@ -54,6 +54,7 @@ CONFIG_DIRS=(
   lazygit
   "systemd/user"
   opencode
+  telia
   wal
   fastfetch
   neofetch
