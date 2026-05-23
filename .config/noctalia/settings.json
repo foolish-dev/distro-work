@@ -406,7 +406,7 @@
     "manualSunrise": "06:30",
     "manualSunset": "18:30",
     "monitorForColors": "",
-    "predefinedScheme": "Tokyo-Night",
+    "predefinedScheme": "Grogu",
     "schedulingMode": "off",
     "syncGsettings": true,
     "useWallpaperColors": false
@@ -484,7 +484,7 @@
     "colorizeIcons": false,
     "deadOpacity": 0.6,
     "displayMode": "auto_hide",
-    "dockType": "floating",
+    "dockType": "attached",
     "enabled": true,
     "floatingRatio": 1,
     "groupApps": false,
@@ -517,7 +517,7 @@
     ],
     "pinnedStatic": false,
     "position": "bottom",
-    "showDockIndicator": true,
+    "showDockIndicator": false,
     "showLauncherIcon": false,
     "sitOnFrame": false,
     "size": 1
