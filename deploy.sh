@@ -126,8 +126,8 @@ if [[ ! -f "$GITCONFIG_LOCAL" ]]; then
 # ~/.gitconfig.local -- per-machine identity + local overrides
 # Included by ~/.gitconfig. Not tracked in the dotfiles repo.
 [user]
-    name = $git_name
-    email = $git_email
+    name = "$git_name"
+    email = "$git_email"
     # Uncomment and point at your signing key to sign commits:
     # signingkey = ~/.ssh/id_ed25519.pub
 
